@@ -19,8 +19,8 @@
             <ul class="navbar-nav mr-auto">
                 <li class=" nav-item ">
                     <a class="navbar-brand" href="/">
-                        MTS AL–MUBAROK</a>
-
+                        MTS AL–MUBAROK
+                    </a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -78,9 +78,6 @@
                         </a>
                     </li>
                 @endif
-
-
-
 
             </ul>
         </div>
