@@ -46,7 +46,6 @@ class AdminOrmawaController extends Controller
             'username' => ['required', 'min:5', 'max:20', 'unique:users'],
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:5|max:255',
-            'ormawa_id' => 'required|unique:users',
             'role' => 'required'
         ]);
 

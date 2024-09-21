@@ -43,11 +43,21 @@
                                             href="/home?category={{ $pos->category->slug }}">{{ $pos->category->name }}
                                     </h6>
                                     <h3 class="card-title">
-                                        <a href="/posts/{{ $pos->slug }}">{{ Str::title($pos->title) }}</a>
+                                        <a class="title"
+                                            href="/posts/{{ $pos->slug }}">{{ Str::title($pos->title) }}</a>
                                     </h3>
                                     <p class="card-description">
-                                        {{ $pos->excerpt }}
-                                        <a href="/posts/{{ $pos->slug }}"> Read More </a>
+                                        <!-- Mobile excerpt, limit to 50 characters of HTML -->
+                                        <span class="mobile-excerpt">
+                                            {!! Str::limit(strip_tags($pos->excerpt), 100) !!}...
+                                            <a href="/posts/{{ $pos->slug }}"> Read More </a>
+                                        </span>
+
+                                        <!-- Desktop excerpt, show full HTML content -->
+                                        <span class="desktop-excerpt">
+                                            {!! $pos->excerpt !!}
+                                            <a href="/posts/{{ $pos->slug }}"> Read More </a>
+                                        </span>
                                     </p>
                                     <p class="author">
                                         by

@@ -41,11 +41,11 @@ class AdminController extends Controller
         $validasi = $request->validate([
             'name' => 'required|max:255',
             'email'  => 'required|email:dns|unique:admins',
-            'role'  => 'required',
             'password' => 'required|min:8|max:255',
         ]);
 
         $validasi['password'] = Hash::make($validasi['password']);
+        $validasi['role'] = 'admin';
 
         Admin::create($validasi);
 
@@ -88,12 +88,11 @@ class AdminController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
-            'role'  => 'required',
         ];
         $email = Admin::where('id', $id)->first();
-            if ($request->email != $email->email) {
-                $rules['email'] = 'required|unique:admins';
-            }
+        if ($request->email != $email->email) {
+            $rules['email'] = 'required|unique:admins';
+        }
         if (!is_null($request->password)) {
             $rules['password'] = 'required|min:8';
             $validasi = $request->validate($rules);

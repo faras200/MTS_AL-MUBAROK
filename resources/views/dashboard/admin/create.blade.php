@@ -32,21 +32,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <div class="form-group ">
-                                    <label for="role">Pilih peran</label>
-                                    <select id="role" name="role" class="form-control mt-4"
-                                        aria-label="With textarea" title="Role" value="">
-                                        <option value="" disabled selected></option>
-                                        <option value="upt_it">UPT IT</option>
-                                        <option value="baak">BAAK</option>
-                                        <option value="warek">Warek3</option>
-                                    </select>
-                                    @error('role')
-                                        <div class="text-danger"> {{ $message }} </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
                                 <label class="">Password</label>
                                 <input type="password" name="password" id="password"class="form-control" required autofocus
                                     value="{{ old('password', 'password') }}">

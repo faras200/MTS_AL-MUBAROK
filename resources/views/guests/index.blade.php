@@ -1,7 +1,7 @@
 @extends('guests.layouts.main')
 
 @section('container')
-    <div class="container">
+    <div class="container pb-5">
         <h3 class="title text-center pt-4" style="margin-top: 0px !important; margin-bottom: 0px !important; ">Berita</h3>
         <div class="row">
             @foreach ($beritas as $berita)
@@ -13,11 +13,24 @@
                                 <h3 class="card-title">{{ Str::title($berita->title) }}</h3>
                             </a>
                             <p class="card-description">
-                                {{ $berita->excerpt }}
+                                <!-- Mobile excerpt, limit to 50 characters of HTML -->
+                                <span class="mobile-excerpt">
+                                    {!! Str::limit(strip_tags($berita->excerpt), 100) !!}..
+                                    <br>
+                                    <a href="/posts/{{ $berita->slug }}" class="btn btn-danger btn-round">
+                                        <i class="material-icons">format_align_left</i> Lihat Berita
+                                    </a>
+                                </span>
+
+                                <!-- Desktop excerpt, show full HTML content -->
+                                <span class="desktop-excerpt">
+                                    {!! $berita->excerpt !!}
+                                    <br>
+                                    <a href="/posts/{{ $berita->slug }}" class="btn btn-danger btn-round">
+                                        <i class="material-icons">format_align_left</i> Lihat Berita
+                                    </a>
+                                </span>
                             </p>
-                            <a href="/posts/{{ $berita->slug }}" class="btn btn-danger btn-round">
-                                <i class="material-icons">format_align_left</i> Lihat Berita
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -49,8 +62,18 @@
                                 <a href="">{{ Str::title($kegiatan->title) }}</a>
                             </h4>
                             <p class="card-description">
-                                {{ $kegiatan->excerpt }}.<a href="/posts/{{ $kegiatan->slug }}"> Read
-                                    More </a>
+                                <!-- Mobile excerpt, limit to 50 characters of HTML -->
+                                <span class="mobile-excerpt">
+                                    {!! Str::limit(strip_tags($kegiatan->excerpt), 100) !!}...
+                                    <a href="/posts/{{ $kegiatan->slug }}"> Read More </a>
+                                </span>
+
+                                <!-- Desktop excerpt, show full HTML content -->
+                                <span class="desktop-excerpt">
+                                    {!! $kegiatan->excerpt !!}
+                                    <a href="/posts/{{ $kegiatan->slug }}"> Read More </a>
+                                </span>
+
                             </p>
                         </div>
                     </div>
@@ -64,7 +87,7 @@
             </div>
         </div>
 
-        <h3 class="title text-center">Organisasi Mahasiswa</h3>
+        {{-- <h3 class="title text-center">Organisasi Mahasiswa</h3>
         <div class="row">
             @foreach ($ormawas as $author)
                 <div class="col-md-3">
@@ -93,6 +116,6 @@
                         double_arrow
                     </i></a>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

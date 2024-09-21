@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="/assetsadmin/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/assetsadmin/img/favicon.png">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo_mts.jpg') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Material Dashboard PRO by Creative Tim
+        MTS AL–MUBAROK
     </title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -18,7 +18,7 @@
     <link href="/assetsadmin/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
     <link href="/assetsadmin/demo/demo.css" rel="stylesheet" />
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -50,8 +50,7 @@
                         &copy;
                         <script>
                             document.write(new Date().getFullYear())
-                        </script>, Built by
-                        <a href="https://www.instagram.com/faras_aan/" target="_blank">Farras Aldi Alfikri</a>
+                        </script>
                     </div>
                 </div>
             </footer>

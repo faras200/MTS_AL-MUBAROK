@@ -3,7 +3,7 @@
     <div class="container-fluid ml-4 mr-4">
         <div class="navbar-translate">
             <a href="/">
-                <img src="{{ asset('images/logo-home.png') }}" width="140" height="40"
+                <img src="{{ asset('images/logo_mts.jpg') }}" width="40" height="40"
                     class="d-inline-block align-center" alt="">
             </a>
 
@@ -17,53 +17,44 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class=" nav-item ">
-                    <a class="navbar-brand" href="/">
+                <li class="nav-item">
+                    <a class="navbar-brand ml-3 title-navbar" href="/">
                         MTS AL–MUBAROK
                     </a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
 
-                <li class=" nav-item">
+                <li class="nav-item">
                     <a href="/" class=" nav-link">
                         <i class="material-icons">house</i> Home
                     </a>
-
+                </li>
+                <li class=" nav-item">
+                    <a href="/posts?category=ppdb" class=" nav-link">
+                        <i class="material-icons">assignment</i> PPDB
+                    </a>
                 </li>
                 <li class=" nav-item">
                     <a href="/posts" class=" nav-link">
                         <i class="material-icons">apps</i> Blogposts
                     </a>
-
                 </li>
                 <li class=" nav-item">
                     <a href="/posts?category=berita" class=" nav-link">
                         <i class="material-icons">newspaper</i> Berita
                     </a>
-
                 </li>
                 <li class=" nav-item">
                     <a href="/posts?category=kegiatan" class=" nav-link">
                         <i class="material-icons">view_day</i> Kegiatan
                     </a>
                 </li>
-                <li class=" nav-item">
+                {{-- <li class=" nav-item">
                     <a href="/ormawa" class=" nav-link">
                         <i class="material-icons">group</i> Ormawa
                     </a>
-                </li>
-                {{-- <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="material-icons">view_carousel</i> Examples
-                    </a>
-                    <div class="dropdown-menu dropdown-with-icons">
-                        <a href="examples/about-us.html" class="dropdown-item">
-                            <i class="material-icons">account_balance</i> About Us
-                        </a>
-                    </div>
                 </li> --}}
-
                 @if (Auth::guard('admin')->user() || Auth::guard('user')->user())
                     <li class="nav-item">
                         <a href="/dashboard" class="nav-link">

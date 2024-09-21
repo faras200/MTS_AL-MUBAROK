@@ -8,25 +8,25 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
-        "ckfinder/ckfinder-laravel-package": "^3.5",
-        "cviebrock/eloquent-sluggable": "^8.0",
-        "fruitcake/laravel-cors": "^2.0",
+        "php": "^8.1",
+        "cviebrock/eloquent-sluggable": "^10.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.54",
-        "laravel/sanctum": "^2.11",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.2",
+        "doctrine/dbal": "^3.0",
         "laravel/tinker": "^2.5",
-        "spatie/laravel-medialibrary": "9.0.0",
+        "spatie/laravel-medialibrary": "11.0.0",
         "unisharp/laravel-filemanager": "^2.5"
     },
     "require-dev": {
-        "facade/ignition": "^2.5",
+        "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3",
-        "itsgoingd/clockwork": "^5.1"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "itsgoingd/clockwork": "^5.1",
+        "laravel/browser-kit-testing": "^7.0"
     },
     "autoload": {
         "psr-4": {
@@ -63,8 +63,11 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

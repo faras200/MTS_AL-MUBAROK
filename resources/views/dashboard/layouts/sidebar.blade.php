@@ -16,7 +16,7 @@
                         <b class="caret"></b>
                     </span>
                 </a>
-                @can('role', 'ormawa', 'bem', 'dema')
+                @can('role', 'panitia')
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
                             <li class="nav-item">
@@ -43,7 +43,7 @@
                     <p> Dashboard </p>
                 </a>
             </li>
-            @can('role', ['upt_it'])
+            @can('role', ['admin'])
                 <li class="nav-item ">
                     <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
                         <i class="material-icons">group</i>
@@ -62,7 +62,7 @@
                             <li class="nav-item  {{ Request::is('dashboard/admin-ormawa') ? 'active' : '' }} ">
                                 <a class="nav-link" href="/dashboard/admin-ormawa">
                                     <i class="material-icons">supervised_user_circle</i>
-                                    <p> Admin Ormawa</p>
+                                    <p> Panitia</p>
                                 </a>
                             </li>
                         </ul>
@@ -75,7 +75,7 @@
                     </a>
                 </li>
             @endcan
-            @can('role', 'ormawa', 'bem', 'dema')
+            @canany('role', ['panitia', 'admin'])
                 <li
                     class="nav-item {{ Request::is('dashboard/' . auth()->user()->ormawa_id . '/anggota*') ? 'active' : '' }} ">
                     <a class="nav-link" href="/dashboard/{{ auth()->user()->ormawa_id }}/anggota">
@@ -96,7 +96,7 @@
                     <p>Pengambilan Dana </p>
                 </a>
             </li>
-            @canany('role', ['upt_it', 'baak', 'warek'])
+            @canany('role', ['admin'])
                 <li class="nav-item {{ Request::is('dashboard/arsip-pengajuan*') ? 'active' : '' }} ">
                     <a class="nav-link" href="/dashboard/arsip-pengajuan">
                         <i class="material-icons">description</i>
@@ -125,7 +125,7 @@
                                 <p> My Posts </p>
                             </a>
                         </li>
-                        @canany('role', ['upt_it', 'baak'])
+                        @canany('role', ['admin'])
                             <li class="nav-item {{ Request::is('dashboard/categories*') ? 'active' : '' }} ">
                                 <a class="nav-link" href="/dashboard/categories">
                                     <i class="material-icons">book</i>

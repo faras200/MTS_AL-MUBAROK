@@ -20,8 +20,8 @@
                     </a>
                 </li>
                 <li class=" nav-item">
-                    <a href="/ormawa" class=" nav-link">
-                        Ormawa
+                    <a href="/posts?category=ppdb" class=" nav-link">
+                        PPDB
                     </a>
                 </li>
             </ul>
@@ -31,8 +31,7 @@
             &copy;
             <script>
                 document.write(new Date().getFullYear())
-            </script>, Built by
-            <a href="https://www.creative-tim.com" target="_blank">Farras Aldi Alfikri.</a>
+            </script>
         </div>
     </div>
 </footer>
