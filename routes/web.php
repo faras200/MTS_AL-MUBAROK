@@ -4,13 +4,13 @@ use App\Models\User;
 use App\Models\Category;
 use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
-use App\http\Controllers\PostController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
-use App\http\Controllers\LoginController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrmawaController;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\ProfileController;
-use App\http\Controllers\RegisterController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\AdminOrmawaController;
@@ -32,7 +32,7 @@ use App\Http\Controllers\EmailNotificationController;
 |
 */
 
-Route::get('/emailsaya', function(){ 
+Route::get('/emailsaya', function () {
     return view('emailku');
 });
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['auth:user,admin']], function () {
@@ -107,7 +107,7 @@ Route::group(['middleware' => ['auth:user,admin']], function () {
     Route::resource('/dashboard/admin-ormawa', AdminOrmawaController::class)->except('show');
     Route::resource('/dashboard/ormawa', OrmawaController::class);
     Route::get('/dashboard/ormawa/delete/{id}', [OrmawaController::class, 'destroy']);
-    Route::resource('/dashboard/ormawa/anggota', AnggotaOrmawaController::class)->except([ 'show']);
+    Route::resource('/dashboard/ormawa/anggota', AnggotaOrmawaController::class)->except(['show']);
     Route::get('/dashboard/ormawa/anggota/delete/{id}', [AnggotaOrmawaController::class, 'destroy']);
     Route::get('/dashboard/{ormawa_id}/anggota', [AnggotaOrmawaController::class, 'index']);
     Route::get('/dashboard/media', function () {
@@ -124,7 +124,7 @@ Route::group(['middleware' => ['auth:user,admin']], function () {
     Route::get('/dashboard/arsip-pengajuan/{id}', [PengajuanController::class, 'detail_arsip']);
     Route::get('/dashboard/pengajuan/delete/{id}', [PengajuanController::class, 'destroy']);
     Route::get('/getpengajuan/{id}', function ($id) {
-        $pengajuan = App\Models\Pengajuan::where('ormawa_id',$id)->where('status', 'setuju')->where('jenis', 'proposal')->get(['id','subjek']);
+        $pengajuan = App\Models\Pengajuan::where('ormawa_id', $id)->where('status', 'setuju')->where('jenis', 'proposal')->get(['id', 'subjek']);
         return response()->json($pengajuan);
     });
     Route::get('/kirimemail', [EmailNotificationController::class, 'index']);
