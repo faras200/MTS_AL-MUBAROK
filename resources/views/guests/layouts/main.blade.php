@@ -28,9 +28,9 @@
             /* kamu bisa sesuaikan ukuran sesuai kebutuhan */
         }
 
-        .page-header {
-            height: 250px !important;
-            min-height: 250px !important;
+        .jumbo-image {
+            height: 300px !important;
+            min-height: 300px !important;
         }
 
         .card-blog {
@@ -56,6 +56,10 @@
             display: none;
         }
 
+        .navbar-brand {
+            display: none;
+        }
+
         .desktop-excerpt {
             display: inline;
         }
@@ -67,12 +71,12 @@
     @include('guests.layouts.navbar')
     @if (!Request::is('login'))
         @if (Request::is('posts*'))
-            <div class="page-header header-filter header-small" data-parallax="true"
+            <div class="jumbo-image page-header header-filter header-small" data-parallax="true"
                 style="background-image: url('{{ is_null($post['image']) ? asset('images/jumbotron.jpeg') : $post['image'] }}'); ">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 ml-auto mr-auto text-center">
-                            <h2 class="title">
+                        <div class="col-md-8 ml-auto mt-5 mr-auto text-center">
+                            <h2 class="title ">
                                 {!! isset($post['title']) && $post['title'] != ''
                                     ? $post['title']
                                     : 'Sistem Informasi Sekolah <br> MTS AL–MUBAROK' !!}
@@ -83,11 +87,11 @@
                 </div>
             </div>
         @else
-            <div class="page-header header-filter header-small" data-parallax="true"
+            <div class="jumbo-image page-header header-filter header-small" data-parallax="true"
                 style="background-image: url('{{ asset('images/jumbotron.jpeg') }}'); ">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 ml-auto mr-auto text-center">
+                        <div class="col-md-8 ml-auto mt-5 mr-auto text-center">
                             <h2 class="title">Sistem Informasi Sekolah <br> MTS AL–MUBAROK</h2>
                         </div>
                     </div>

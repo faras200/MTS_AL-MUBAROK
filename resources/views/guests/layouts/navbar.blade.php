@@ -1,9 +1,8 @@
-<nav class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg " color-on-scroll="100"
-    id="sectionsNav">
+<nav class="navbar fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav">
     <div class="container-fluid ml-4 mr-4">
         <div class="navbar-translate">
             <a href="/">
-                <img src="{{ asset('images/logo_mts.jpg') }}" width="40" height="40"
+                <img src="{{ asset('images/mts-logo.png') }}" width="150" height="50"
                     class="d-inline-block align-center" alt="">
             </a>
 
@@ -19,7 +18,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="navbar-brand ml-3 title-navbar" href="/">
-                        MTS AL–MUBAROK
+                        MAIN MENU
                     </a>
                 </li>
             </ul>
