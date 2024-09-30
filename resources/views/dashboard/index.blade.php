@@ -61,7 +61,7 @@
     @endcanany
 
     <div class="row">
-        <div class="col-md-6" style="padding: 0px 0px !important">
+        <div class="col-md-6">
             <div class="card" style="min-height: 350px !important;">
                 <div class="card-header card-header-success card-header-icon">
                     <div class="card-icon">

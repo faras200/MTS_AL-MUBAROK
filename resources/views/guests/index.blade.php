@@ -17,7 +17,7 @@
                                 <span class="mobile-excerpt">
                                     {!! Str::limit(strip_tags($berita->excerpt), 100) !!}..
                                     <br>
-                                    <a href="/posts/{{ $berita->slug }}" class="btn btn-danger btn-round">
+                                    <a href="/posts/{{ $berita->slug }}" class="btn btn-info btn-round">
                                         <i class="material-icons">format_align_left</i> Lihat Berita
                                     </a>
                                 </span>
@@ -26,7 +26,7 @@
                                 <span class="desktop-excerpt">
                                     {!! $berita->excerpt !!}
                                     <br>
-                                    <a href="/posts/{{ $berita->slug }}" class="btn btn-danger btn-round">
+                                    <a href="/posts/{{ $berita->slug }}" class="btn btn-info btn-round">
                                         <i class="material-icons">format_align_left</i> Lihat Berita
                                     </a>
                                 </span>
@@ -36,7 +36,7 @@
                 </div>
             @endforeach
             <div class="col-12 text-center">
-                <a href="/posts?category=berita" class="btn btn-rose btn-round">Lihat Semua Berita <i
+                <a href="/posts?category=berita" class="btn btn-success btn-round">Lihat Semua Berita <i
                         class="material-icons">
                         double_arrow
                     </i></a>
@@ -80,7 +80,7 @@
                 </div>
             @endforeach
             <div class="col-12 text-center">
-                <a href="/posts?category=kegiatan" class="btn btn-rose btn-round">Lihat Semua Kegiatan <i
+                <a href="/posts?category=kegiatan" class="btn btn-success btn-round">Lihat Semua Kegiatan <i
                         class="material-icons">
                         double_arrow
                     </i></a>
@@ -112,7 +112,7 @@
                 </div>
             @endforeach
             <div class="col-12 text-center mb-5">
-                <a href="/ormawa" class="btn btn-rose btn-round">Lihat Semua Ormawa <i class="material-icons">
+                <a href="/ormawa" class="btn btn-success btn-round">Lihat Semua Ormawa <i class="material-icons">
                         double_arrow
                     </i></a>
             </div>

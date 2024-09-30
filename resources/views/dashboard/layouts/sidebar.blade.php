@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="rose" data-background-color="black" data-image="/assetsadmin/img/sidebar-1.jpg">
+<div class="sidebar" data-color="green" data-background-color="black">
     <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -7,36 +7,35 @@
     <div class="sidebar-wrapper" style="height: 700px !important">
         <div class="user">
             <div class="photo">
-                <img src="/assetsadmin/img/faces/avatar.jpg" />
+                <img src="/assetsadmin/img/faces/marc.jpg" />
             </div>
             <div class="user-info">
-                <a data-toggle="collapse" href="#collapseExample" class="username">
+                <a class="username">
+                    <span>
+                        Dashboard Sistem
+                    </span>
+                </a>
+                {{-- <a data-toggle="collapse" href="#collapseExample" class="username">
                     <span>
                         Admin {{ auth()->user()->name }}
                         <b class="caret"></b>
                     </span>
-                </a>
-                @can('role', 'panitia')
-                    <div class="collapse" id="collapseExample">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/dashboard/profile">
-                                    <i class="material-icons">person</i>
-                                    <span class="sidebar-normal"> My Profile </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                @endcan
+                </a> --}}
+
+                {{-- <div class="collapse" id="collapseExample">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard/profile">
+                                <i class="material-icons">person</i>
+                                <span class="sidebar-normal"> My Profile </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div> --}}
+
             </div>
         </div>
         <ul class="nav">
-            <li class="nav-item ">
-                <a class="nav-link" href="/home">
-                    <i class="material-icons">home</i>
-                    <p> Home </p>
-                </a>
-            </li>
             <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="/dashboard">
                     <i class="material-icons">dashboard</i>
@@ -68,23 +67,22 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item {{ Request::is('dashboard/ormawa*') ? 'active' : '' }} ">
+                {{-- <li class="nav-item {{ Request::is('dashboard/ormawa*') ? 'active' : '' }} ">
                     <a class="nav-link" href="/dashboard/ormawa">
                         <i class="material-icons">security</i>
                         <p> Ormawa </p>
                     </a>
-                </li>
+                </li> --}}
             @endcan
             @canany('role', ['panitia', 'admin'])
-                <li
-                    class="nav-item {{ Request::is('dashboard/' . auth()->user()->ormawa_id . '/anggota*') ? 'active' : '' }} ">
+                <li class="nav-item {{ Request::is('dashboard/siswa*') ? 'active' : '' }} ">
                     <a class="nav-link" href="/dashboard/{{ auth()->user()->ormawa_id }}/anggota">
-                        <i class="material-icons">group</i>
-                        <p> Anggota </p>
+                        <i class="material-icons">security</i>
+                        <p> Siswa</p>
                     </a>
                 </li>
             @endcan
-            <li class="nav-item {{ Request::is('dashboard/pengajuan*') ? 'active' : '' }} ">
+            {{-- <li class="nav-item {{ Request::is('dashboard/pengajuan*') ? 'active' : '' }} ">
                 <a class="nav-link" href="/dashboard/pengajuan">
                     <i class="material-icons">post_add</i>
                     <p> Pengajuan </p>
@@ -95,19 +93,19 @@
                     <i class="material-icons">request_quote</i>
                     <p>Pengambilan Dana </p>
                 </a>
-            </li>
-            @canany('role', ['admin'])
+            </li> --}}
+            {{-- @canany('role', ['admin'])
                 <li class="nav-item {{ Request::is('dashboard/arsip-pengajuan*') ? 'active' : '' }} ">
                     <a class="nav-link" href="/dashboard/arsip-pengajuan">
                         <i class="material-icons">description</i>
                         <p>Arsip Pengajuan </p>
                     </a>
                 </li>
-            @endcanany
-            <li class="nav-item {{ Request::is('dashboard/arsip-file*') ? 'active' : '' }} ">
-                <a class="nav-link" href="/dashboard/arsip-file">
-                    <i class="material-icons">folder</i>
-                    <p>Arsip File </p>
+            @endcanany --}}
+            <li class="nav-item {{ Request::is('dashboard/ppdb*') ? 'active' : '' }} ">
+                <a class="nav-link" href="/dashboard/ppdb">
+                    <i class="material-icons">description</i>
+                    <p>PPDB</p>
                 </a>
             </li>
             <li class="nav-item ">
@@ -135,12 +133,24 @@
                         @endcanany
                         <li class="nav-item {{ Request::is('dashboard/media*') ? 'active' : '' }} ">
                             <a class="nav-link" href="/dashboard/media">
-                                <i class="material-icons">folder</i>
+                                <i class="material-icons">image</i>
                                 <p> Media </p>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('dashboard/arsip-file*') ? 'active' : '' }} ">
+                            <a class="nav-link" href="/dashboard/arsip-file">
+                                <i class="material-icons">folder</i>
+                                <p>Arsip File </p>
                             </a>
                         </li>
                     </ul>
                 </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/home">
+                    <i class="material-icons">home</i>
+                    <p> Home </p>
+                </a>
             </li>
         </ul>
     </div>

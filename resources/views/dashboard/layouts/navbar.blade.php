@@ -28,16 +28,23 @@
                               <i class="material-icons">person</i>
                               <p class="d-lg-none d-md-block">
                                   Account
+                                  <b class="caret"></b>
                               </p>
                           </a>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                              {{-- <a class="dropdown-item" href="#">Profile</a> --}}
-                              <div class="dropdown-divider"></div>
+                          <div class="dropdown-menu dropdown-menu-right collapse"
+                              aria-labelledby="navbarDropdownProfile">
+
+                              <a class="nav-link dropdown-item" style="width: 93% !important" href="/dashboard/profile">
+                                  <i class="material-icons">person</i>
+                                  <span class="sidebar-normal"> My Profile </span>
+                              </a>
                               <form action="/logout" method="post">
                                   @csrf
                                   <button class="dropdown-item" style="width: 93% !important" type="submit"><i
                                           class="material-icons">logout</i>Logout</button>
                               </form>
+
+                              <div class="dropdown-divider"></div>
                           </div>
                       </li>
                   </ul>
