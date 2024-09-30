@@ -58,8 +58,8 @@
                                     <p> Admin </p>
                                 </a>
                             </li>
-                            <li class="nav-item  {{ Request::is('dashboard/admin-ormawa') ? 'active' : '' }} ">
-                                <a class="nav-link" href="/dashboard/admin-ormawa">
+                            <li class="nav-item  {{ Request::is('dashboard/panitia') ? 'active' : '' }} ">
+                                <a class="nav-link" href="/dashboard/panitia">
                                     <i class="material-icons">supervised_user_circle</i>
                                     <p> Panitia</p>
                                 </a>
@@ -76,7 +76,7 @@
             @endcan
             @canany('role', ['panitia', 'admin'])
                 <li class="nav-item {{ Request::is('dashboard/siswa*') ? 'active' : '' }} ">
-                    <a class="nav-link" href="/dashboard/{{ auth()->user()->ormawa_id }}/anggota">
+                    <a class="nav-link" href="/dashboard/siswa">
                         <i class="material-icons">security</i>
                         <p> Siswa</p>
                     </a>
@@ -108,44 +108,48 @@
                     <p>PPDB</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" data-toggle="collapse" href="#konten">
-                    <i class="material-icons">dashboard_customize</i>
-                    <p> Kelola Konten
-                        <b class="caret"></b>
-                    </p>
-                </a>
-                <div class="collapse" id="konten">
-                    <ul class="nav">
-                        <li class="nav-item {{ Request::is('dashboard/posts*') ? 'active' : '' }} ">
-                            <a class="nav-link" href="/dashboard/posts">
-                                <i class="material-icons">assignment</i>
-                                <p> My Posts </p>
-                            </a>
-                        </li>
-                        @canany('role', ['admin'])
-                            <li class="nav-item {{ Request::is('dashboard/categories*') ? 'active' : '' }} ">
-                                <a class="nav-link" href="/dashboard/categories">
-                                    <i class="material-icons">book</i>
-                                    <p> Categories </p>
+            @can('role', ['admin', 'panitia'])
+                <li class="nav-item ">
+                    <a class="nav-link" data-toggle="collapse" href="#konten">
+                        <i class="material-icons">dashboard_customize</i>
+                        <p> Kelola Konten
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse" id="konten">
+                        <ul class="nav">
+                            @canany('role', ['panitia'])
+                                <li class="nav-item {{ Request::is('dashboard/posts*') ? 'active' : '' }} ">
+                                    <a class="nav-link" href="/dashboard/posts">
+                                        <i class="material-icons">assignment</i>
+                                        <p> My Posts </p>
+                                    </a>
+                                </li>
+                            @endcanany
+                            @canany('role', ['admin'])
+                                <li class="nav-item {{ Request::is('dashboard/categories*') ? 'active' : '' }} ">
+                                    <a class="nav-link" href="/dashboard/categories">
+                                        <i class="material-icons">book</i>
+                                        <p> Categories </p>
+                                    </a>
+                                </li>
+                            @endcanany
+                            <li class="nav-item {{ Request::is('dashboard/media*') ? 'active' : '' }} ">
+                                <a class="nav-link" href="/dashboard/media">
+                                    <i class="material-icons">image</i>
+                                    <p> Media </p>
                                 </a>
                             </li>
-                        @endcanany
-                        <li class="nav-item {{ Request::is('dashboard/media*') ? 'active' : '' }} ">
-                            <a class="nav-link" href="/dashboard/media">
-                                <i class="material-icons">image</i>
-                                <p> Media </p>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::is('dashboard/arsip-file*') ? 'active' : '' }} ">
-                            <a class="nav-link" href="/dashboard/arsip-file">
-                                <i class="material-icons">folder</i>
-                                <p>Arsip File </p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+                            <li class="nav-item {{ Request::is('dashboard/arsip-file*') ? 'active' : '' }} ">
+                                <a class="nav-link" href="/dashboard/arsip-file">
+                                    <i class="material-icons">folder</i>
+                                    <p>Arsip File </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endcan
             <li class="nav-item ">
                 <a class="nav-link" href="/home">
                     <i class="material-icons">home</i>

@@ -1,7 +1,6 @@
 <footer class="footer">
     <div class="container">
-        <nav class="float-left">
-
+        <nav class="text-center">
             <ul>
                 <li class=" nav-item">
                     <a href="/posts" class=" nav-link">
@@ -26,7 +25,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="copyright float-right">
+        <div class="text-center">
             Copyright
             &copy;
             <script>

@@ -7,7 +7,7 @@ use App\Models\Ormawa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AdminOrmawaController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class AdminOrmawaController extends Controller
      */
     public function index()
     {
-        return view('dashboard.admin-ormawa.index', [
-            'admins' => User::where('role', 'panitia')->get()
+        return view('dashboard.siswa.index', [
+            'admins' => User::where('role', 'siswa')->get()
         ]);
     }
 
@@ -28,7 +28,7 @@ class AdminOrmawaController extends Controller
      */
     public function create()
     {
-        return view('dashboard.admin-ormawa.create', [
+        return view('dashboard.siswa.create', [
             'ormawas' => Ormawa::all()
         ]);
     }
@@ -77,7 +77,7 @@ class AdminOrmawaController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard.admin-ormawa.edit', [
+        return view('dashboard.siswa.edit', [
             'admin' => User::where('id', $id)->first(),
             'ormawas' => Ormawa::all()
         ]);

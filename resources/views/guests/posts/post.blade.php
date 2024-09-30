@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container">
-        <h2 style="margin-top:0px; padding-top:10px;">{{ $post['title'] }}</h2>
+        <h2 class="title" style="margin-top:0px; padding-top:10px;">{{ $post['title'] }}</h2>
         <h5>Post By
             <a href="/home?authors={{ $post->user->username }}">{{ $post->user->name }} </a>in
             <a href="/home?category={{ $post->category->slug }}">{{ $post->category->name }} </a>
@@ -12,18 +12,30 @@
 
         <style>
             p img {
+                min-width: 100% !important;
                 max-width: 100% !important;
                 height: auto !important;
+                display: block !important;
+                /* Mengubah img menjadi elemen block */
+                margin-left: auto !important;
+                /* Mengatur margin kiri otomatis */
+                margin-right: auto !important;
+                /* Mengatur margin kanan otomatis */
             }
+
 
             p input {
                 max-width: 100% !important;
                 height: auto !important;
             }
-        </style>
-        <p>{!! $post->body !!}</p>
 
-        <div id="disqus_thread"></div>
+            p {
+                text-align: justify !important;
+            }
+        </style>
+        <p class="mb-5">{!! $post->body !!}</p>
+
+        <div class="mt-5" id="disqus_thread"></div>
         <script>
             /**
              *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.

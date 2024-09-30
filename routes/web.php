@@ -5,6 +5,7 @@ use App\Models\Category;
 use UniSharp\LaravelFilemanager\Lfm;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PpdbController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrmawaController;
@@ -17,9 +18,10 @@ use App\Http\Controllers\AdminOrmawaController;
 use App\Http\Controllers\UploadImageController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AnggotaOrmawaController;
-use App\Http\Controllers\PengambilanDanaController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\PengambilanDanaController;
 use App\Http\Controllers\EmailNotificationController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,7 +106,8 @@ Route::group(['middleware' => ['auth:user,admin']], function () {
     Route::resource('/dashboard/admin', AdminController::class)->except('show');
     Route::get('/dashboard/admin/delete/{id}', [AdminController::class, 'delete']);
     Route::get('/dashboard/admin-ormawa/delete/{id}', [AdminOrmawaController::class, 'destroy']);
-    Route::resource('/dashboard/admin-ormawa', AdminOrmawaController::class)->except('show');
+    Route::resource('/dashboard/panitia', AdminOrmawaController::class)->except('show');
+    Route::resource('/dashboard/siswa', SiswaController::class)->except('show');
     Route::resource('/dashboard/ormawa', OrmawaController::class);
     Route::get('/dashboard/ormawa/delete/{id}', [OrmawaController::class, 'destroy']);
     Route::resource('/dashboard/ormawa/anggota', AnggotaOrmawaController::class)->except(['show']);
@@ -118,6 +121,7 @@ Route::group(['middleware' => ['auth:user,admin']], function () {
     });
     Route::resource('/dashboard/pengajuan', PengajuanController::class);
     Route::resource('/dashboard/ambil-dana', PengambilanDanaController::class);
+    Route::resource('/dashboard/ppdb', PpdbController::class);
     Route::get('/dashboard/ambil-dana/delete/{id}', [PengambilanDanaController::class, 'destroy']);
     Route::get('/dashboard/arsip-pengajuan', [PengajuanController::class, 'arsip']);
     Route::get('/dashboard/pengajuan/{id}/status', [PengajuanController::class, 'status']);

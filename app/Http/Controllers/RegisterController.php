@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,17 +21,20 @@ class RegisterController extends Controller
     {
         $validasi = $request->validate([
             'name' => 'required|max:255',
-            'username' => ['required', 'min:5', 'max:20', 'unique:users'],
-            'email' => 'required|email:dns|unique:users',
+            'email' => 'required|unique:users',
             'password' => 'required|min:5|max:255'
         ]);
 
+        if (!$validasi) {
+            return back()->with('loginError', 'Register Gagal');
+        }
+
         $validasi['password'] = Hash::make($validasi['password']);
+        $validasi['role'] = 'siswa';
+        $validasi['username'] = Str::slug($request->name, '-');
 
         User::create($validasi);
 
-        //$request->session()->flash('success', 'Registrasi Berhasil !! Silahkan Login  ');
-
-        return redirect('/login')->with('success', 'Registrasi Berhasil !! Silahkan Login  ');
+        return redirect('/login')->with('success', 'Registrasi Berhasil !! Silahkan Login');
     }
 }

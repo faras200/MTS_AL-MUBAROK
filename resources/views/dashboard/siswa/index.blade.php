@@ -11,11 +11,11 @@
                             groups
                         </i>
                     </div>
-                    <h4 class="card-title">Panitia</h4>
+                    <h4 class="card-title">Siswa</h4>
                 </div>
                 <div class="card-body">
                     <div class="toolbar text-center">
-                        <a href="/dashboard/panitia/create" class="btn btn-primary px-3">Tambah Panitia<i
+                        <a href="/dashboard/siswa/create" class="btn btn-primary px-3">Tambah Siswa<i
                                 class="material-icons">add</i></a>
                         @if (session()->has('success'))
                             @php
@@ -36,6 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Nama</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -46,15 +47,16 @@
                                 @foreach ($admins as $admin)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $admin->name }}</td>
                                         <td>{{ $admin->username }}</td>
                                         <td>{{ $admin->email }}</td>
                                         <td>{{ $admin->role }}</td>
                                         <td class="text-right">
-                                            <a href="/dashboard/panitia/{{ $admin->id }}/edit"
+                                            <a href="/dashboard/siswa/{{ $admin->id }}/edit"
                                                 class="btn btn-link btn-warning btn-just-icon edit"><i
                                                     class="material-icons">edit</i></a>
                                             <button class="btn btn-link btn-danger btn-just-icon remove"
-                                                onclick="confirmationHapusData('/dashboard/panitia/delete/{{ $admin->id }}')"><i
+                                                onclick="confirmationHapusData('/dashboard/siswa/delete/{{ $admin->id }}')"><i
                                                     class="material-icons">close</i></button>
 
                                         </td>

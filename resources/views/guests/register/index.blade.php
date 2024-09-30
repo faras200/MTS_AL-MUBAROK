@@ -13,6 +13,19 @@
                             </div>
 
                             <div class="card-body">
+                                @if (session()->has('loginError'))
+                                    <div class="alert alert-danger">
+                                        <div class="container-fluid">
+                                            <div class="alert-icon">
+                                                <i class="material-icons">warning</i>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                            </button>
+                                            <b>Alert: </b> {{ session('loginError') }}
+                                        </div>
+                                    </div>
+                                @endif
                                 <span class="bmd-form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -23,10 +36,12 @@
                                         <input type="text" class="form-control  @error('name') is-invalid @enderror"
                                             name="name" placeholder="Name..." autofocus required
                                             value="{{ old('name') }}">
-                                        @error('name')
-                                            <small class="text-danger ml--5"> {{ $message }} </small>
-                                        @enderror
                                     </div>
+                                    @error('name')
+                                        <div class="text-center">
+                                            <small class="text-danger "> {{ $message }} </small>
+                                        </div>
+                                    @enderror
                                 </span>
 
                                 <span class="bmd-form-group">
@@ -38,10 +53,12 @@
                                         </div>
                                         <input type="email" name="email" class="form-control" placeholder="Email..."
                                             value="{{ old('email') }}" autofocus required>
-                                        @error('email')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
                                     </div>
+                                    @error('email')
+                                        <div class="text-center">
+                                            <small class="text-danger">{{ $message }}</small>
+                                        </div>
+                                    @enderror
                                 </span>
 
                                 <span class="bmd-form-group">
@@ -53,10 +70,12 @@
                                         </span>
                                         <input type="password" name="password" placeholder="Password..."
                                             class="form-control">
-                                        @error('password')
-                                            <small class="text-danger ml--5"> {{ $message }} </small>
-                                        @enderror
                                     </div>
+                                    @error('password')
+                                        <div class="text-center">
+                                            <small class="text-danger "> {{ $message }} </small>
+                                        </div>
+                                    @enderror
                                 </span>
 
                             </div>
@@ -65,7 +84,7 @@
                                     class="btn btn-rose btn-link btn-lg">Register</button>
                             </div>
                             <div class="footer text-center">
-                                <Small>I have account ? <a href="/login" class="text-primary">Login Now</a></Small>
+                                <Small>Sudah punya akun ? <a href="/login" class="text-primary">Login Sekarang</a></Small>
                             </div>
 
                         </div>
