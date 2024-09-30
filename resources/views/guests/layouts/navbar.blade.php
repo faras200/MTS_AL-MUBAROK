@@ -34,11 +34,11 @@
                         <i class="material-icons">assignment</i> PPDB
                     </a>
                 </li>
-                <li class=" nav-item">
+                {{-- <li class=" nav-item">
                     <a href="/posts" class=" nav-link">
                         <i class="material-icons">apps</i> Blogposts
                     </a>
-                </li>
+                </li> --}}
                 <li class=" nav-item">
                     <a href="/posts?category=berita" class=" nav-link">
                         <i class="material-icons">newspaper</i> Berita

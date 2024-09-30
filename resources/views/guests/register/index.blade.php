@@ -5,27 +5,30 @@
         <div class="container mt-5">
             <div class="row mt-4">
                 <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-                    <form class="form" method="post" action="/login">
+                    <form class="form" method="post" action="/register">
                         @csrf
-
                         <div class="card card-login card-hidden">
                             <div class="card-header card-header-success text-center">
-                                <h4 class="card-title">Login Page</h4>
+                                <h4 class="card-title">Register Page</h4>
                             </div>
-                            <div class="card-body ">
-                                @if (session()->has('loginError'))
-                                    <div class="alert alert-danger">
-                                        <div class="container-fluid">
-                                            <div class="alert-icon">
-                                                <i class="material-icons">warning</i>
-                                            </div>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true"><i class="material-icons">clear</i></span>
-                                            </button>
-                                            <b>Alert: </b> {{ session('loginError') }}
+
+                            <div class="card-body">
+                                <span class="bmd-form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">face</i>
+                                            </span>
                                         </div>
+                                        <input type="text" class="form-control  @error('name') is-invalid @enderror"
+                                            name="name" placeholder="Name..." autofocus required
+                                            value="{{ old('name') }}">
+                                        @error('name')
+                                            <small class="text-danger ml--5"> {{ $message }} </small>
+                                        @enderror
                                     </div>
-                                @endif
+                                </span>
+
                                 <span class="bmd-form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -40,26 +43,31 @@
                                         @enderror
                                     </div>
                                 </span>
+
                                 <span class="bmd-form-group">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
+                                        <span class="input-group-addon">
                                             <span class="input-group-text">
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
-                                        </div>
-                                        <input type="password" name="password" class="form-control"
-                                            placeholder="Password...">
+                                        </span>
+                                        <input type="password" name="password" placeholder="Password..."
+                                            class="form-control">
+                                        @error('password')
+                                            <small class="text-danger ml--5"> {{ $message }} </small>
+                                        @enderror
                                     </div>
                                 </span>
+
                             </div>
                             <div class="card-footer pb-0 justify-content-center">
                                 <button type="submit" style="font-weight: 600 !important;"
-                                    class="btn btn-rose btn-link btn-lg">Login</button>
+                                    class="btn btn-rose btn-link btn-lg">Register</button>
                             </div>
                             <div class="footer text-center">
-                                <Small>Belum punya akun ? <a href="/register" class="text-primary">Daftar
-                                        Sekarang</a></Small>
+                                <Small>I have account ? <a href="/login" class="text-primary">Login Now</a></Small>
                             </div>
+
                         </div>
                     </form>
                 </div>
