@@ -46,16 +46,16 @@ class SiswaController extends Controller
             'username' => ['required', 'min:5', 'max:20', 'unique:users'],
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:5|max:255',
-            'role' => 'required'
         ]);
 
         $validasi['password'] = Hash::make($validasi['password']);
+        $validasi['role'] = 'siswa';
 
         User::create($validasi);
 
         //$request->session()->flash('success', 'Registrasi Berhasil !! Silahkan Login  ');
 
-        return redirect('/dashboard/admin-ormawa')->with('success', 'Berhasil Menambah Data Admin!!');
+        return redirect('/dashboard/siswa')->with('success', 'Berhasil Menambah Data Siswa!!');
     }
 
     /**
@@ -78,8 +78,7 @@ class SiswaController extends Controller
     public function edit($id)
     {
         return view('dashboard.siswa.edit', [
-            'admin' => User::where('id', $id)->first(),
-            'ormawas' => Ormawa::all()
+            'admin' => User::where('id', $id)->first()
         ]);
     }
 
@@ -93,9 +92,7 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required|max:255',
-            'ormawa_id'  => 'required',
-            'role' => 'required'
+            'name' => 'required|max:255'
         ];
         $emails = User::where('id', $id)->get();
         foreach ($emails as $email) :
@@ -117,7 +114,7 @@ class SiswaController extends Controller
         User::where('id', $id)
             ->update($validasi);
 
-        return redirect('/dashboard/admin-ormawa')->with('success', 'Berhasil Mengubah Admin!!');
+        return redirect('/dashboard/siswa')->with('success', 'Berhasil Mengubah Siswa!!');
     }
 
     /**
@@ -131,6 +128,6 @@ class SiswaController extends Controller
 
         User::destroy($id);
 
-        return redirect('/dashboard/admin-ormawa')->with('success', 'Berhasil Menghapus Admin!!');
+        return redirect('/dashboard/siswa')->with('success', 'Berhasil Menghapus Siswa!!');
     }
 }

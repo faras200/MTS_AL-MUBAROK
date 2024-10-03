@@ -30,56 +30,64 @@
                                     })
                                 </script>
                             @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                         <div class="table-responsive">
-                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
-                                width="100%" style="width:100%">
+                            <!-- Tabel untuk menampilkan data -->
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Subjek</th>
-                                        <th>Jenis</th>
-                                        <th>Status</th>
-                                        <th>File</th>
-                                        <th class="text-center">Aksi</th>
+                                        <th>Nama Siswa</th>
+                                        <th>No HP</th>
+                                        <th>NISN</th>
+                                        <th>No KTP</th>
+                                        <th>No KK</th>
+                                        <th>No Akte</th>
+                                        <th>Ijazah</th>
+                                        <th>Foto Pass</th>
+                                        <th>Alamat</th>
+                                        <th width="10%" align="right">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pengajuans as $pengajuan)
+                                    @if ($datas->count() == 0)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pengajuan->subjek }}</td>
-                                            <td class="text-capitalize">{{ $pengajuan->jenis }}</td>
-                                            <td
-                                                class="{{ Str::is($pengajuan->status, 'setuju') ? 'text-success' : (Str::is($pengajuan->status, 'revisi') ? 'text-warning' : (Str::is($pengajuan->status, 'tolak') ? 'text-danger' : 'text-success')) }} text-capitalize">
-                                                {{ Str::is($pengajuan->status, 'setuju')
-                                                    ? 'Di Setujui'
-                                                    : (Str::is($pengajuan->status, 'revisi') ? 'Di' : (Str::is($pengajuan->status, 'tolak') ? 'Di' : 'Sedang di ')) .
-                                                        ' ' .
-                                                        $pengajuan->status }}
-                                            </td>
-                                            @php
-                                                $files = Str::of($pengajuan->file)->explode(',');
-                                            @endphp
+                                            <td colspan="11" align="center">Tidak Ada Data</td>
+                                        </tr>
+                                    @endif
+                                    @foreach ($datas as $index => $ppdb)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td> <!-- Nomor urut -->
+                                            <td>{{ $ppdb->name }}</td>
+                                            <td>{{ $ppdb->no_hp }}</td>
+                                            <td>{{ $ppdb->nisn }}</td>
+                                            <td>{{ $ppdb->ktp }}</td>
+                                            <td>{{ $ppdb->kk ?? '-' }}</td>
+                                            <td>{{ $ppdb->akte ?? '-' }}</td>
                                             <td>
-                                                @foreach ($files as $file)
-                                                    <a target="_blank" href="{{ $file }}"><span class="material-icons">
-                                                            description
-                                                        </span></a>
-                                                @endforeach
+                                                <a target="_blank" href="{{ $ppdb->ijazah }}"><span class="material-icons">
+                                                        description
+                                                    </span></a>
                                             </td>
-                                            <td class="text-right">
-                                                <a href="/dashboard/ppdb/{{ $pengajuan->id }}/status"
-                                                    class="btn btn-link btn-info btn-just-icon edit"><i
-                                                        class="material-icons">visibility</i></a>
-                                                <a href="/dashboard/ppdb/{{ $pengajuan->id }}/edit"
-                                                    class="btn btn-link btn-warning btn-just-icon edit"><i
-                                                        class="material-icons">edit</i></a>
-                                                @if ($pengajuan->status == 'tolak')
-                                                    <button class="btn btn-link btn-danger btn-just-icon remove"
-                                                        onclick="confirmationHapusData('/dashboard/ppdb/delete/{{ $pengajuan->id }}?psj={{ $pengajuan->persetujuan->id }}')"><i
-                                                            class="material-icons">close</i></button>
-                                                @endif
+                                            <td><img src="{{ $ppdb->foto }}" width="80px" height="100px"> </td>
+                                            <td>{{ $ppdb->alamat }}</td>
+                                            <td align="right">
+                                                <!-- Aksi (Edit dan Hapus) -->
+                                                <a href="{{ route('ppdb.edit', $ppdb->id) }}"
+                                                    class="btn btn-warning btn-sm">Edit</a>
+
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="confirmationHapusData('/dashboard/ppdb/delete/{{ $ppdb->id }}')">Hapus</button>
+
                                             </td>
                                         </tr>
                                     @endforeach

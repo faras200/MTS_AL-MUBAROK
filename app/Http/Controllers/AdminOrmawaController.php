@@ -45,17 +45,17 @@ class AdminOrmawaController extends Controller
             'name' => 'required|max:255',
             'username' => ['required', 'min:5', 'max:20', 'unique:users'],
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required|min:5|max:255',
-            'role' => 'required'
+            'password' => 'required|min:5|max:255'
         ]);
 
         $validasi['password'] = Hash::make($validasi['password']);
+        $validasi['role'] = 'panitia';
 
         User::create($validasi);
 
         //$request->session()->flash('success', 'Registrasi Berhasil !! Silahkan Login  ');
 
-        return redirect('/dashboard/admin-ormawa')->with('success', 'Berhasil Menambah Data Admin!!');
+        return redirect('/dashboard/panitia')->with('success', 'Berhasil Menambah Data Panitia!!');
     }
 
     /**
@@ -78,8 +78,7 @@ class AdminOrmawaController extends Controller
     public function edit($id)
     {
         return view('dashboard.admin-ormawa.edit', [
-            'admin' => User::where('id', $id)->first(),
-            'ormawas' => Ormawa::all()
+            'admin' => User::where('id', $id)->first()
         ]);
     }
 
@@ -94,8 +93,6 @@ class AdminOrmawaController extends Controller
     {
         $rules = [
             'name' => 'required|max:255',
-            'ormawa_id'  => 'required',
-            'role' => 'required'
         ];
         $emails = User::where('id', $id)->get();
         foreach ($emails as $email) :
@@ -117,7 +114,7 @@ class AdminOrmawaController extends Controller
         User::where('id', $id)
             ->update($validasi);
 
-        return redirect('/dashboard/admin-ormawa')->with('success', 'Berhasil Mengubah Admin!!');
+        return redirect('/dashboard/panitia')->with('success', 'Berhasil Mengubah Panitia!!');
     }
 
     /**
@@ -131,6 +128,6 @@ class AdminOrmawaController extends Controller
 
         User::destroy($id);
 
-        return redirect('/dashboard/admin-ormawa')->with('success', 'Berhasil Menghapus Admin!!');
+        return redirect('/dashboard/panitia')->with('success', 'Berhasil Menghapus Panitia!!');
     }
 }

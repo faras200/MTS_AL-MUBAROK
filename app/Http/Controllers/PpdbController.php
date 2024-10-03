@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ppdb;
+use App\Models\Ormawa;
 use App\Models\Pengajuan;
 use App\Models\Persetujuan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\EmailNotification;
-use App\Models\Ormawa;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class PpdbController extends Controller
@@ -19,16 +21,14 @@ class PpdbController extends Controller
      */
     public function index()
     {
-
-        $pengajuan = Pengajuan::where('status', '!=', 'setuju')->get();
-
-        $ajuan = null;
-        if (auth()->user()->role == 'bem' || auth()->user()->role == 'dema') {
-            $ajuan = Pengajuan::where('ormawa_id', auth()->user()->ormawa_id)->get();
+        $data = null;
+        if (auth()->user()->role == 'siswa') {
+            $data = Ppdb::where('user_id', auth()->user()->id)->get();
+        } else {
+            $data = Ppdb::latest()->get();
         }
         return view('dashboard.ppdb.index', [
-            'pengajuans' => $pengajuan,
-            'ajuan' => $ajuan,
+            'datas' => $data,
         ]);
     }
 
@@ -75,40 +75,53 @@ class PpdbController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->input());
-        $validasi = $request->validate([
-            'subjek' => 'required',
-            'jenis' => 'required',
-            'baak' => 'required',
-            'file' => 'required',
-        ]);
-        Persetujuan::create([
-            'baak' => $request->input('baak'),
-            'warek' => $request->input('warek', '0'),
-            'bem' => $request->input('bem', '0'),
-            'dema' => $request->input('dema', '0')
+        $user = auth()->user();
+        // Validasi data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'hp' => 'required|numeric',
+            'nisn' => 'required|numeric',
+            'ktp' => 'required|numeric',
+            'kk' => 'nullable|numeric',
+            'akte' => 'nullable|numeric',
+            'ijazah' => 'required|string|max:255',
+            'foto' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
         ]);
 
-        $id_persetujuan = Persetujuan::latest()->first('id');
-        $validasi['persetujuan_id'] = $id_persetujuan->id;
-        $validasi['ormawa_id'] = auth()->user()->ormawa_id;
-        $data = $validasi;
-        $data['pengaju'] = Ormawa::firstwhere('id', $validasi['ormawa_id']);
-        $data['pengaju'] = $data['pengaju']->nama;
-        $data['objek'] = 'Ada Pengajuan Baru';
-        $data['pesan_status'] = 'Pengajuan Baru';
-        $data['view'] = 'emailku';
-        if ($request->input('dema') == 1) {
-            Mail::to("farasaldi200@gmail.com")->send(new EmailNotification($data));
-        } else if ($request->input('bem') == 1) {
-            Mail::to("farasaldi200@gmail.com")->send(new EmailNotification($data));
-        } else if ($request->input('warek') == 1) {
-            Mail::to("farasaldi200@gmail.com")->send(new EmailNotification($data));
-        } else if ($request->input('baak') == 1) {
-            Mail::to("farasaldi200@gmail.com")->send(new EmailNotification($data));
+        // Gunakan transaksi untuk memastikan integritas data
+        DB::beginTransaction();
+
+        try {
+            // Simpan data ke database
+            $ppdb = new Ppdb();
+            $ppdb->user_id = $user->id;
+            $ppdb->name = $validatedData['name'];
+            $ppdb->no_hp = $validatedData['hp'];
+            $ppdb->nisn = $validatedData['nisn'];
+            $ppdb->ktp = $validatedData['ktp'];
+            $ppdb->kk = $validatedData['kk'];
+            $ppdb->akte = $validatedData['akte'];
+            $ppdb->ijazah = $validatedData['ijazah'];
+            $ppdb->foto = $validatedData['foto'];
+            $ppdb->alamat = $validatedData['alamat'];
+            $ppdb->created_at = now();
+
+            // Simpan data
+            $ppdb->save();
+
+            // Commit transaksi jika tidak ada error
+            DB::commit();
+
+            // Redirect ke halaman sebelumnya dengan pesan sukses
+            return redirect('/dashboard/ppdb')->with('success', 'Data berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            // Rollback transaksi jika ada error
+            DB::rollBack();
+
+            // Kembalikan ke halaman sebelumnya dengan pesan error
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.']);
         }
-        Pengajuan::create($validasi);
-        return redirect('/dashboard/pengajuan')->with('success', 'Berhasil Menambah Data Pengajuan!!');
     }
 
     /**
@@ -174,18 +187,18 @@ class PpdbController extends Controller
                 $data['pesan_status'] = 'Selamat Pengajuan Anda Berhasil Disetujui';
                 Mail::to("farasaldi30@gmail.com")->send(new EmailNotification($data));
             }
-            return redirect('/dashboard/pengajuan')->with('success', 'Berhasil Menyetujui Pengajuan!!');
+            return redirect('/dashboard/ppdb')->with('success', 'Berhasil Menyetujui Ppdb!!');
         } elseif ($request->input('revisi')) {
             Pengajuan::where('id', $id)->update([
                 'catatan_revisi' => $request->input('catatan_revisi'),
                 'status' => 'revisi'
             ]);
-            return redirect('/dashboard/pengajuan')->with('success', 'Berhasil Menyimpan Catatan Revisi !!');
+            return redirect('/dashboard/ppdb')->with('success', 'Berhasil Menyimpan Catatan Revisi !!');
         } elseif ($request->input('tolak')) {
             Pengajuan::where('id', $id)->update([
                 'status' => 'tolak'
             ]);
-            return redirect('/dashboard/pengajuan')->with('success', 'Pengajuan ditolak!!');
+            return redirect('/dashboard/ppdb')->with('success', 'Pengajuan ditolak!!');
         }
         $validasi = $request->validate([
             'subjek' => 'required',
@@ -200,7 +213,7 @@ class PpdbController extends Controller
         ]);
 
         Pengajuan::where('id', $id)->update($validasi);
-        return redirect('/dashboard/pengajuan')->with('success', 'Berhasil Mengubah Data Pengajuan!!');
+        return redirect('/dashboard/ppdb')->with('success', 'Berhasil Mengubah Data Ppdb!!');
     }
 
     /**
@@ -211,8 +224,7 @@ class PpdbController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        Persetujuan::destroy($request->psj);
-        Pengajuan::destroy($id);
-        return redirect('/dashboard/pengajuan')->with('success', 'Berhasil Menghapus Data Pengajuan!!');
+        Ppdb::destroy($id);
+        return redirect('/dashboard/ppdb')->with('success', 'Berhasil Menghapus Data Ppdb!!');
     }
 }

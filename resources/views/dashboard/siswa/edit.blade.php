@@ -10,15 +10,15 @@
                             person_add_alt_1
                         </i>
                     </div>
-                    <h4 class="card-title">Ubah Admin Ormawa</h4>
+                    <h4 class="card-title">Ubah Siswa</h4>
                 </div>
                 <div class="card-body mt-4">
-                    <form method="post" action="/dashboard/admin-ormawa/{{ $admin->id }}" class="form-horizontal">
+                    <form method="post" action="/dashboard/siswa/{{ $admin->id }}" class="form-horizontal">
                         @method('put')
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <label class="">Nama Admin</label>
+                                <label class="">Nama Siswa</label>
                                 <input type="text" name="name" id="name"class="form-control" required autofocus
                                     value="{{ old('name', $admin->name) }}">
                                 @error('name')
@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <label class="">Username Admin</label>
+                                <label class="">Username Siswa</label>
                                 <input type="text" name="username" id="username"class="form-control" required autofocus
                                     value="{{ old('username', $admin->username) }}">
                                 @error('username')
@@ -41,37 +41,7 @@
                                     <div class="text-danger"> {{ $message }} </div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="form-group ">
-                                    <label for="">Role</label>
-                                    <select id="" name="role" class="form-control mt-4"
-                                        aria-label="With textarea">
-                                        <option value="{{ $admin->role }}" selected>{{ $admin->role }}</option>
-                                        <option value="ormawa">Ormawa</option>
-                                        <option value="BEM">BEM Universitas</option>
-                                        <option value="DEMA">Dewan Mahasiswa</option>
-                                    </select>
-                                    @error('role')
-                                        <div class="text-danger"> {{ $message }} </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="form-group ">
-                                    <label for="">Tanggung Jawab Ormawa</label>
-                                    <select id="ormawa" name="ormawa_id" class="form-control mt-4"
-                                        aria-label="With textarea">
-                                        <option value="{{ $admin->ormawa_id }}" selected>{{ $admin->ormawa->nama }}
-                                        </option>
-                                        @foreach ($ormawas as $ormawa)
-                                            <option value="{{ $ormawa->id }}">{{ $ormawa->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('ormawa_id')
-                                        <div class="text-danger"> {{ $message }} </div>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-md-6 mb-4">
                                 <label class="">Password</label>
                                 <input type="password" name="password" id="password"class="form-control" autofocus

@@ -10,114 +10,126 @@
                             post_add
                         </i>
                     </div>
-                    <h4 class="card-title">Tambah Pengajuan</h4>
+                    <h4 class="card-title">Tambah Data PPDB</h4>
                 </div>
                 <div class="card-body mt-4">
-                    <form method="post" action="/dashboard/pengajuan" class="form-horizontal">
+                    <form method="post" action="/dashboard/ppdb" class="form-horizontal">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <label class="">Subjek</label>
-                                <input type="text" name="subjek" id="subjek"class="form-control" required autofocus
-                                    value="{{ old('subjek') }}">
-                                @error('subjek')
+                                <label>Nama Siswa <span class="text-danger">*</span></label>
+                                <input type="text" name="name" id="name"class="form-control" required autofocus
+                                    value="{{ old('name') }}">
+                                @error('name')
                                     <div class="text-danger"> {{ $message }} </div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <div class="form-group ">
-                                    <label for="">Jenis Pengajuan</label>
-                                    <select id="" name="jenis" class="form-control mt-4"
-                                        aria-label="With textarea">
-                                        <option value="" selected disabled>jenis</option>
-                                        <option value="proposal">Proposal</option>
-                                        <option value="lpj">LPJ</option>
-                                        <option value="lainnya">Lainnya</option>
-                                    </select>
-                                    @error('jenis')
-                                        <div class="text-danger"> {{ $message }} </div>
-                                    @enderror
-                                </div>
+                                <label>No HP <span class="text-danger">*</span></label>
+                                <input type="number" name="hp" id="hp"class="form-control" required
+                                    value="{{ old('hp') }}">
+                                @error('hp')
+                                    <div class="text-danger"> {{ $message }} </div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <p>Ingin diajukan dan minta persetujuan kemana?</p>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input name="baak" class="form-check-input" type="checkbox" value="1">
-                                        Persetujuan BAAK?
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                        @error('baak')
-                                            <div class="text-danger"> {{ $message }} </div>
-                                        @enderror
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input name="warek" class="form-check-input" type="checkbox" value="1">
-                                        Persetujuan Warek 3?
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input name="bem" class="form-check-input" type="checkbox" value="1">
-                                        Persetujuan BEM-U?
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input name="dema" class="form-check-input" type="checkbox" value="1">
-                                        Persetujuan DEMA?
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
+                                <label>NISN <span class="text-danger">*</span></label>
+                                <input type="number" name="nisn" id="nisn"class="form-control" required
+                                    value="{{ old('nisn') }}">
+                                @error('nisn')
+                                    <div class="text-danger"> {{ $message }} </div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <label class=" col-form-label">File</label>
+                                <label>No KTP <span class="text-danger">*</span></label>
+                                <input type="number" name="ktp" id="ktp"class="form-control" required
+                                    value="{{ old('ktp') }}">
+                                @error('ktp')
+                                    <div class="text-danger"> {{ $message }} </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="">No KK</label>
+                                <input type="number" name="kk" id="kk"class="form-control"
+                                    value="{{ old('kk') }}">
+                                @error('kk')
+                                    <div class="text-danger"> {{ $message }} </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="">No Akte</label>
+                                <input type="number" name="akte" id="akte"class="form-control"
+                                    value="{{ old('akte') }}">
+                                @error('akte')
+                                    <div class="text-danger"> {{ $message }} </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class=" col-form-label">Ijazah <span class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input id="thumbnail" class="form-control" type="email" name="file" readonly
-                                        multiple>
+                                    <input id="fileijazah" required class="form-control" type="email" name="ijazah"
+                                        readonly multiple>
                                     <span class="input-group-btn">
-                                        <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                        <a id="lfm" data-input="fileijazah" data-preview="holder"
                                             class="btn btn-fab btn-round btn-primary">
                                             <i class="fa fa-file text-white"></i>
                                         </a>
                                     </span>
-                                    @error('file')
+                                    @error('ijazah')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6 mb-4">
+                                <label class=" col-form-label">Foto Pass <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input id="thumbnail" required class="form-control" type="email" readonly
+                                        name="foto">
+                                    <span class="input-group-btn">
+                                        <a id="foto" data-input="thumbnail" data-preview="holder"
+                                            class="btn btn-fab btn-round btn-primary">
+                                            <i class="fa fa-picture-o text-white"></i>
+                                        </a>
+                                    </span>
+                                    @error('image')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label class="">Alamat <span class="text-danger">*</span></label>
+                                <textarea rows="5" name="alamat" id="alamat" required class="form-control">
+                                    {{ old('alamat') }}
+                                </textarea>
+                                @error('alamat')
+                                    <div class="text-danger"> {{ $message }} </div>
+                                @enderror
+                            </div>
 
                         </div>
-
-                </div>
-                <div class="card-footer ">
-                    <div class="col-12">
-                        <div class="text-right">
-                            <button onclick="history.back()" class="btn btn-grey text-left">Kembali</button>
-                            <button type="submit" formnovalidate="formnovalidate" class="btn btn-rose">Tambah</button>
+                        <div class="card-footer ">
+                            <div class="col-12">
+                                <div class="text-right">
+                                    <button onclick="history.back()" class="btn btn-grey text-left">Kembali</button>
+                                    <button type="submit" formnovalidate="formnovalidate"
+                                        class="btn btn-rose">Tambah</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
-    <!-- end row -->
-    <script>
-        var route_prefix = "../../laravel-filemanager";
-        $('#lfm').filemanager('files', {
-            prefix: route_prefix
-        });
-    </script>
-@endsection
+        <!-- end row -->
+        <script>
+            var route_prefix = "../../laravel-filemanager";
+            $('#lfm').filemanager('files', {
+                prefix: route_prefix
+            });
+
+            var foto_prefix = "../../laravel-filemanager";
+            $('#foto').filemanager('image', {
+                prefix: foto_prefix
+            });
+        </script>
+    @endsection

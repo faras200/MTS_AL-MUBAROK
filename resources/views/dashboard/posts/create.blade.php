@@ -33,16 +33,7 @@
                                 @enderror
 
                             </div>
-                            {{-- <div class="col-md-6 mb-4">
-                                <img class="img-preview img-fluid col-sm-5" alt="">
-                                <label class=" col-form-label">Image</label>
-                  <div class="custom-file  ">
-                    <input type="file" name="image" class=" custom-file-input" id="image" onchange="previewImage()">
-                  </div>
-                    @error('image')
-                    <div class="text-danger"> {{ $message }} </div>
-                   @enderror
-                </div> --}}
+
                             <div class="col-md-6 mb-4">
                                 <label class=" col-form-label">Foto</label>
                                 <div class="input-group">
