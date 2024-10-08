@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
-                                <label>No KTP <span class="text-danger">*</span></label>
+                                <label>No KTP Orang Tua <span class="text-danger">*</span></label>
                                 <input type="number" name="ktp" id="ktp"class="form-control" required
                                     value="{{ old('ktp') }}">
                                 @error('ktp')

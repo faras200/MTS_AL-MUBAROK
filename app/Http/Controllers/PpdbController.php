@@ -152,7 +152,7 @@ class PpdbController extends Controller
     public function edit($id)
     {
         return view('dashboard.ppdb.edit', [
-            'pengajuan' => Pengajuan::where('id', $id)->first(),
+            'ppdb' => Ppdb::where('id', $id)->first(),
         ]);
     }
     public function status($id)
@@ -171,50 +171,55 @@ class PpdbController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->input());
-        if ($request->input('acc')) {
-            Persetujuan::where('id', $request->input('persetujuan_id'))->update([
-                auth()->user()->role => '2',
-            ]);
-            if (auth()->user()->role == 'baak') {
-                Pengajuan::where('id', $id)->update(['status' => 'setuju']);
-                $pengajuan = Pengajuan::firstwhere('id', $id);
-                $data['jenis'] = $pengajuan->jenis;
-                $data['view'] = 'emailku';
-                $data['pengaju'] = null;
-                $data['subjek'] = $pengajuan->subjek;
-                $data['objek'] = 'Pengajuan Berhasil Disetujui';
-                $data['pesan_status'] = 'Selamat Pengajuan Anda Berhasil Disetujui';
-                Mail::to("farasaldi30@gmail.com")->send(new EmailNotification($data));
-            }
-            return redirect('/dashboard/ppdb')->with('success', 'Berhasil Menyetujui Ppdb!!');
-        } elseif ($request->input('revisi')) {
-            Pengajuan::where('id', $id)->update([
-                'catatan_revisi' => $request->input('catatan_revisi'),
-                'status' => 'revisi'
-            ]);
-            return redirect('/dashboard/ppdb')->with('success', 'Berhasil Menyimpan Catatan Revisi !!');
-        } elseif ($request->input('tolak')) {
-            Pengajuan::where('id', $id)->update([
-                'status' => 'tolak'
-            ]);
-            return redirect('/dashboard/ppdb')->with('success', 'Pengajuan ditolak!!');
-        }
-        $validasi = $request->validate([
-            'subjek' => 'required',
-            'jenis' => 'required',
-            'file' => 'required',
-        ]);
-        Persetujuan::where('id', $request->input('persetujuan_id'))->update([
-            'baak' => $request->input('baak'),
-            'warek' => $request->input('warek', '0'),
-            'bem' => $request->input('bem', '0'),
-            'dema' => $request->input('dema', '0')
+        $user = auth()->user();
+        // Validasi data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'hp' => 'required|numeric',
+            'nisn' => 'required|numeric',
+            'ktp' => 'required|numeric',
+            'kk' => 'nullable|numeric',
+            'akte' => 'nullable|numeric',
+            'ijazah' => 'required|string|max:255',
+            'foto' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
         ]);
 
-        Pengajuan::where('id', $id)->update($validasi);
-        return redirect('/dashboard/ppdb')->with('success', 'Berhasil Mengubah Data Ppdb!!');
+        // Gunakan transaksi untuk memastikan integritas data
+        DB::beginTransaction();
+
+        try {
+            // Cari data yang akan di-update
+            $ppdb = Ppdb::findOrFail($id);
+
+            // Update data yang ada
+            $ppdb->user_id = $user->id;
+            $ppdb->name = $validatedData['name'];
+            $ppdb->no_hp = $validatedData['hp'];
+            $ppdb->nisn = $validatedData['nisn'];
+            $ppdb->ktp = $validatedData['ktp'];
+            $ppdb->kk = $validatedData['kk'];
+            $ppdb->akte = $validatedData['akte'];
+            $ppdb->ijazah = $validatedData['ijazah'];
+            $ppdb->foto = $validatedData['foto'];
+            $ppdb->alamat = $validatedData['alamat'];
+
+            // Simpan perubahan
+            $ppdb->save();
+
+            // Commit transaksi jika tidak ada error
+            DB::commit();
+
+            return redirect('/dashboard/ppdb')->with('success', 'Berhasil Mengubah Data Ppdb!!');
+        } catch (\Exception $e) {
+            // Rollback transaksi jika ada error
+            DB::rollBack();
+
+            // Kembalikan ke halaman sebelumnya dengan pesan error
+            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.']);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -16,8 +16,15 @@
                     </div>
                     <div class="card-body">
                         <div class="toolbar text-center">
-                            <a href="/dashboard/ppdb/create" class="btn btn-success px-3">Tambah Data PPDB<i
-                                    class="material-icons">add</i></a>
+                            @if (auth()->user()->role == 'siswa')
+                                @if ($datas->count() < 1)
+                                    <a href="/dashboard/ppdb/create" class="btn btn-success px-3">Tambah Data PPDB<i
+                                            class="material-icons">add</i></a>
+                                @endif
+                            @else
+                                <a href="/dashboard/ppdb/create" class="btn btn-success px-3">Tambah Data PPDB<i
+                                        class="material-icons">add</i></a>
+                            @endif
                             @if (session()->has('success'))
                                 @php
                                     $p = session('success');

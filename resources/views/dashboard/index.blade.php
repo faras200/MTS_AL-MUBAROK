@@ -67,7 +67,7 @@
                     <div class="card-icon">
                         <i class="material-icons">post_add</i>
                     </div>
-                    <h4 class="card-title">Pengajuan Terbaru</h4>
+                    <h4 class="card-title">Ppdb Terbaru</h4>
                 </div>
                 <div class="card-body ">
                     <div class="row">
@@ -124,7 +124,7 @@
                             <div class="card-icon" style="padding: 5px !important;">
                                 <i class="material-icons">group</i>
                             </div>
-                            <p class="card-category">Anggota Ormawa</p>
+                            <p class="card-category">Siswa</p>
                             <h3 class="card-title">{{ $anggota }}</h3>
                         </div>
                         <div class="card-footer">
@@ -158,7 +158,7 @@
                             <div class="card-icon" style="padding: 5px !important;">
                                 <i class="material-icons">request_quote</i>
                             </div>
-                            <p class="card-category">Pengambilan Dana</p>
+                            <p class="card-category">Total Panitia</p>
                             <h3 class="card-title">{{ $dana }}</h3>
                         </div>
                         <div class="card-footer">
