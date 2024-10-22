@@ -12,7 +12,7 @@
             <div class="user-info">
                 <a class="username">
                     <span>
-                        Dashboard Sistem
+                        Dashboard {{ auth()->user()->role }}
                     </span>
                 </a>
                 {{-- <a data-toggle="collapse" href="#collapseExample" class="username">

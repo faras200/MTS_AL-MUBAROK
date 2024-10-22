@@ -85,6 +85,9 @@ Route::get('/authors/{authors:username}', function (User $authors) {
     ]);
 });
 
+Route::get('/profil', function () {
+    return view('guests.authors.show');
+});
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/register', [RegisterController::class, 'index'])->name('register');

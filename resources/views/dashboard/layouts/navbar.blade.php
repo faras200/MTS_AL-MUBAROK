@@ -34,10 +34,10 @@
                           <div class="dropdown-menu dropdown-menu-right collapse"
                               aria-labelledby="navbarDropdownProfile">
 
-                              <a class="nav-link dropdown-item" style="width: 93% !important" href="/dashboard/profile">
+                              {{-- <a class="nav-link dropdown-item" style="width: 93% !important" href="/dashboard/profile">
                                   <i class="material-icons">person</i>
                                   <span class="sidebar-normal"> My Profile </span>
-                              </a>
+                              </a> --}}
                               <form action="/logout" method="post">
                                   @csrf
                                   <button class="dropdown-item" style="width: 93% !important" type="submit"><i

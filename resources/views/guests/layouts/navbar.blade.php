@@ -49,11 +49,11 @@
                         <i class="material-icons">view_day</i> Kegiatan
                     </a>
                 </li>
-                {{-- <li class=" nav-item">
-                    <a href="/ormawa" class=" nav-link">
-                        <i class="material-icons">group</i> Ormawa
+                <li class=" nav-item">
+                    <a href="/profil" class=" nav-link">
+                        <i class="material-icons">apps</i> Profil Sekolah
                     </a>
-                </li> --}}
+                </li>
                 @if (Auth::guard('admin')->user() || Auth::guard('user')->user())
                     <li class="nav-item">
                         <a href="/dashboard" class="nav-link">

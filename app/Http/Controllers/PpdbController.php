@@ -78,15 +78,15 @@ class PpdbController extends Controller
         $user = auth()->user();
         // Validasi data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'hp' => 'required|numeric',
-            'nisn' => 'required|numeric',
-            'ktp' => 'required|numeric',
+            'name' => 'string|max:255',
+            'hp' => 'numeric',
+            'nisn' => 'numeric',
+            'ktp' => 'numeric',
             'kk' => 'nullable|numeric',
             'akte' => 'nullable|numeric',
-            'ijazah' => 'required|string|max:255',
-            'foto' => 'required|string|max:255',
-            'alamat' => 'required|string|max:500',
+            'ijazah' => 'string|max:255',
+            'foto' => 'string|max:255',
+            'alamat' => 'string|max:500',
         ]);
 
         // Gunakan transaksi untuk memastikan integritas data
