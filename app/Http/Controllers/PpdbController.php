@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Mail\EmailNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class PpdbController extends Controller
 {
@@ -231,5 +232,27 @@ class PpdbController extends Controller
     {
         Ppdb::destroy($id);
         return redirect('/dashboard/ppdb')->with('success', 'Berhasil Menghapus Data Ppdb!!');
+    }
+
+    public function printPdf($id)
+    {
+        $ppdb = Ppdb::find($id); // Ambil data berdasarkan ID
+
+        if (!$ppdb) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        // return view('dashboard.ppdb.printpdf', compact('ppdb'));
+        // Pecah URL dan ambil path lokal
+        $url = $ppdb->foto;
+        $parsedUrl = parse_url($url, PHP_URL_PATH);
+        $relativePath = str_replace('/storage', '', $parsedUrl);
+        $localImagePath = public_path('storage' . $relativePath);
+
+        // Render view ke dalam format PDF
+        $pdf = PDF::loadView('dashboard.ppdb.printpdf', compact('ppdb', 'localImagePath'));
+
+        // Kembalikan file PDF ke browser
+        return $pdf->stream('Data-PPDB-Siswa-' . $ppdb->name . '.pdf');
     }
 }

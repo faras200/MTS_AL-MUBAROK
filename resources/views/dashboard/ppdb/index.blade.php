@@ -49,7 +49,8 @@
                         </div>
                         <div class="table-responsive">
                             <!-- Tabel untuk menampilkan data -->
-                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0">
+                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                                width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -85,7 +86,7 @@
                                                         description
                                                     </span></a>
                                             </td>
-                                            <td><img src="{{ $ppdb->foto }}" width="80px" height="100px"> </td>
+                                            <td><img src="{{ $ppdb->foto }}" width="60px" height="80px"> </td>
                                             <td>{{ $ppdb->alamat }}</td>
                                             <td align="right">
                                                 <!-- Aksi (Edit dan Hapus) -->
@@ -94,7 +95,8 @@
 
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                     onclick="confirmationHapusData('/dashboard/ppdb/delete/{{ $ppdb->id }}')">Hapus</button>
-
+                                                <a href="{{ route('ppdb.print', $ppdb->id) }}" class="btn btn-info btn-sm"
+                                                    target="_blank">Print PDF</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -109,4 +111,21 @@
             <!-- end col-md-12 -->
         </div>
     @endcan
+
+    <!-- Tambahkan script DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
 @endsection

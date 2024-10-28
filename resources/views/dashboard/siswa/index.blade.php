@@ -53,18 +53,46 @@
                                         <td>{{ $admin->role }}</td>
                                         <td class="text-right">
                                             <a href="/dashboard/siswa/{{ $admin->id }}/edit"
-                                                class="btn btn-link btn-warning btn-just-icon edit"><i
-                                                    class="material-icons">edit</i></a>
+                                                class="btn btn-link btn-warning btn-just-icon edit">
+                                                <i class="material-icons">edit</i>
+                                            </a>
                                             <button class="btn btn-link btn-danger btn-just-icon remove"
-                                                onclick="confirmationHapusData('/dashboard/siswa/delete/{{ $admin->id }}')"><i
-                                                    class="material-icons">close</i></button>
-
+                                                onclick="confirmationHapusData('/dashboard/siswa/delete/{{ $admin->id }}')">
+                                                <i class="material-icons">close</i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Tambahkan script DataTables -->
+                    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+                    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+                    <!-- Tambahkan script di bawah untuk menginisialisasi DataTables -->
+                    <script>
+                        $(document).ready(function() {
+                            $('#datatables').DataTable({
+                                "responsive": true,
+                                "autoWidth": false,
+                                "lengthChange": true,
+                                "searching": true,
+                                "paging": true,
+                                "ordering": true,
+                                "info": true,
+                                "columnDefs": [{
+                                    "orderable": false,
+                                    "targets": [5] // Kolom Aksi tidak dapat diurutkan
+                                }],
+                                "language": {
+                                    "emptyTable": "Data Not Found"
+                                }
+                            });
+                        });
+                    </script>
+
                 </div>
                 <!-- end content-->
             </div>

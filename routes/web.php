@@ -126,6 +126,7 @@ Route::group(['middleware' => ['auth:user,admin']], function () {
     Route::resource('/dashboard/ambil-dana', PengambilanDanaController::class);
     Route::resource('/dashboard/ppdb', PpdbController::class);
     Route::get('/dashboard/ppdb/delete/{id}', [PpdbController::class, 'destroy']);
+    Route::get('/dashboard/ppdb/print/{id}', [PpdbController::class, 'printPdf'])->name('ppdb.print');
     Route::get('/dashboard/ambil-dana/delete/{id}', [PengambilanDanaController::class, 'destroy']);
     Route::get('/dashboard/arsip-pengajuan', [PengajuanController::class, 'arsip']);
     Route::get('/dashboard/pengajuan/{id}/status', [PengajuanController::class, 'status']);
